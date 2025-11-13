@@ -68,6 +68,49 @@ async function loadPlaylist(){
   }
 }
 
+const searchInput = qs("#search");
+const searchIcon = qs("#searchIcon");
+
+searchInput.addEventListener("input", () => {
+  const val = searchInput.value.trim();
+
+  if (val.length > 0) {
+    // Clear-Button anzeigen
+    searchIcon.src = "/icons/clear.svg";
+    searchIcon.style.pointerEvents = "auto";
+  } else {
+    // Search-Button anzeigen
+    searchIcon.src = "/icons/search.svg";
+    searchIcon.style.pointerEvents = "auto";
+
+    // Ergebnisse leeren, wenn input leer
+    qs("#results").innerHTML = "";
+  }
+
+  // Debounced Livesuche
+  if (val) {
+    debounce(() => doSearch(), 250);
+  }
+});
+
+searchIcon.addEventListener("click", () => {
+  const val = searchInput.value.trim();
+
+  // Wenn Input leer ist → normales Suchen
+  if (!val) {
+    doSearch();
+    return;
+  }
+
+  // Wenn nicht leer → clear mode
+  searchInput.value = "";
+  searchInput.focus();
+  qs("#results").innerHTML = "";
+
+  // Zurück zu search.svg
+  searchIcon.src = "/icons/search.svg";
+});
+
 async function doSearch(){
   const q = qs("#search").value.trim();
   const list = qs("#results");

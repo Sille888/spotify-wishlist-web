@@ -84,7 +84,8 @@ body {
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  padding: 5px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .np-link-icon {
@@ -118,6 +119,7 @@ body {
 }
 
 .searchbar {
+  overflow: hidden;
   position: relative;
   display: flex;
 }
@@ -132,7 +134,7 @@ body {
 
 .search-icon {
   position: absolute;
-  right: 12px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
   width: 22px;
@@ -140,7 +142,7 @@ body {
   cursor: pointer;
   opacity: 0.5;
   filter: invert();
-  pointer-events: none;
+  padding: 12px;
 }
 
 input,
