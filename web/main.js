@@ -81,7 +81,7 @@ searchInput.addEventListener("input", () => {
   } else {
     // Search-Button anzeigen
     searchIcon.src = "/icons/search.svg";
-    searchIcon.style.pointerEvents = "auto";
+    searchIcon.style.pointerEvents = "none";
 
     // Ergebnisse leeren, wenn input leer
     qs("#results").innerHTML = "";
@@ -109,6 +109,7 @@ searchIcon.addEventListener("click", () => {
 
   // Zurück zu search.svg
   searchIcon.src = "/icons/search.svg";
+  searchIcon.style.pointerEvents = "none";
 });
 
 async function doSearch(){
