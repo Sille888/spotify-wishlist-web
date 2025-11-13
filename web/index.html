@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ronny’s Disco – Musikwünsche</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="ticket">
+    <div class="title">RONNY’S DISCO</div>
+    <div class="subtitle">MUSIKWÜNSCHE</div>
+
+    <div class="card">
+      <div class="row">
+        <input id="search" placeholder="Song oder Künstler suchen..." />
+        <button id="btnSearch">Suchen</button>
+      </div>
+      <div id="results" class="list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bereits gewünschte Lieder</div>
+      <div id="playlist" class="list"></div>
+    </div>
+
+    <footer>
+      <small>Hinweis: Songs landen in der Wunsch-Playlist. Keine Garantie, dass alles gespielt wird 😉</small>
+    </footer>
+  </div>
+
+  <template id="item-tpl">
+    <div class="item">
+      <img class="cover" />
+      <div class="meta">
+        <div class="name"></div>
+        <div class="artist"></div>
+      </div>
+      <button class="add">Hinzufügen</button>
+    </div>
+  </template>
+
+  <script src="/main.js"></script>
+</body>
+</html>

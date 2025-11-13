@@ -1,0 +1,208 @@
+/* Fonts einbinden */
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&family=Canva+Sans:wght@300;400;500;700&display=swap');
+
+/* Farb- und Layout-Basis */
+:root {
+  --bg-color: #7088a5;
+  --accent: #e3e8ff;
+  --text: #ffffff;
+  --card-bg: rgba(255,255,255,0.08);
+  --card-border: rgba(255,255,255,0.15);
+  --btn-bg: #e3e8ff;
+  --btn-text: #1e2b46;
+}
+
+/* Fixierte Breite, um "Springen" bei Suchergebnissen zu verhindern */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ticket, .card, .list, .row {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.item {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hintergrundbild */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-color) url('/background.png') center/cover no-repeat fixed;
+  color: var(--text);
+  font-family: 'Canva Sans', 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 0.95rem; /* leicht kleinerer Grundtext */
+}
+
+/* Hauptcontainer */
+.ticket {
+  max-width: 900px;
+  width: 100%;
+  padding: 32px 20px 80px;
+  backdrop-filter: blur(6px);
+}
+
+/* Headline */
+.title {
+  font-family: 'Staatliches', sans-serif;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'Canva Sans', sans-serif;
+  font-size: 1.8rem;
+  opacity: 0.9;
+  margin: 8px 0 32px;
+  text-align: center;
+}
+
+/* Kartenbereiche */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.card-title {
+  font-family: 'Staatliches', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* Eingabe + Button */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+input,
+button,
+select,
+textarea {
+  font-size: 16px; /* verhindert Zoom auf iPhones */
+}
+
+input {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.15);
+  color: var(--text);
+  outline: none;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+input:focus {
+  background: rgba(255,255,255,0.25);
+  border-color: var(--accent);
+}
+input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+button {
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Listen & Items */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  transition: background 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.item .cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.item .meta {
+  flex: 1;
+  overflow: hidden;
+}
+
+.item .name {
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item .artist {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item button {
+  font-size: 0.85rem;
+  padding: 8px 12px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 1rem; /* Hinweis größer */
+  opacity: 0.9;
+  margin-top: 32px;
+}
+
+/* Responsiv */
+@media (max-width: 720px) {
+  .card {
+    padding: 14px;
+  }
+  .title {
+    font-size: clamp(2.8rem, 10vw, 3.8rem);
+  }
+  .subtitle {
+    font-size: 1.4rem;
+  }
+  .item .cover {
+    width: 50px;
+    height: 50px;
+  }
+}
