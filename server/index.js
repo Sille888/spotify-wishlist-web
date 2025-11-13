@@ -20,7 +20,8 @@ app.get("/auth/login", (req, res) => {
     "playlist-modify-public",
     "playlist-modify-private",
     "playlist-read-private",
-    "ugc-image-upload"
+    "user-read-playback-state",
+    "user-read-currently-playing"
   ];
   const url = api.createAuthorizeURL(scopes, "state123") + "&show_dialog=true";
   res.redirect(url);
@@ -77,6 +78,32 @@ app.post("/api/add", async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Konnte nicht hinzufügen" });
+  }
+});
+
+app.get("/api/nowplaying", async (req, res) => {
+  try {
+    await ensureAccess();
+    const data = await api.getMyCurrentPlaybackState();
+
+    if (!data.body || !data.body.is_playing || !data.body.item) {
+      return res.json({ playing: false });
+    }
+
+    const track = data.body.item;
+
+    res.json({
+      playing: true,
+      name: track.name,
+      artists: track.artists.map(a => a.name).join(", "),
+      image: track.album.images?.[1]?.url || track.album.images?.[0]?.url || null,
+      progress_ms: data.body.progress_ms,
+      duration_ms: track.duration_ms
+    });
+
+  } catch (e) {
+    console.error(e);
+    res.json({ playing: false });
   }
 });
 

@@ -70,6 +70,25 @@ body {
   text-align: center;
 }
 
+.nowplaying-box {
+  margin-bottom: 14px;
+}
+
+.nowplaying-box .progressbar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.nowplaying-box .progressbar .progress {
+  height: 100%;
+  background: var(--chip);
+  width: 0%;
+}
+
 /* Kartenbereiche */
 .card {
   background: var(--card-bg);

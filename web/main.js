@@ -104,3 +104,35 @@ qs("#search").addEventListener("keydown", e => {
 
 loadPlaylist();
 setInterval(loadPlaylist, 30000); // auto-refresh
+
+async function loadNowPlaying() {
+  const box = qs("#nowPlaying");
+
+  try {
+    const data = await fetchJSON("/api/nowplaying");
+
+    // Wenn kein Song → Box verstecken
+    if (!data.playing) {
+      box.style.display = "none";
+      return;
+    }
+
+    // Song aktiv → Box anzeigen
+    box.style.display = "flex";
+
+    // Inhalte setzen
+    box.querySelector(".cover").src = data.image;
+    box.querySelector(".name").textContent = data.name;
+    box.querySelector(".artist").textContent = data.artists;
+
+    const progress = (data.progress_ms / data.duration_ms) * 100;
+    box.querySelector(".progress").style.width = progress + "%";
+
+  } catch (e) {
+    // Bei Fehler lieber auch verstecken
+    box.style.display = "none";
+  }
+}
+
+loadNowPlaying();
+setInterval(loadNowPlaying, 3000);
