@@ -94,6 +94,32 @@ body {
   margin: 16px 0;
 }
 
+.searchbar {
+  position: relative;
+  display: flex;
+}
+
+.searchbar input {
+  padding-right: 44px;
+}
+
+.searchbar input:focus + .search-icon {
+  opacity: 0.8;
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: invert();
+  pointer-events: none;
+}
+
 input,
 button,
 select,
@@ -177,22 +203,17 @@ button {
   overflow: hidden;
 }
 
-.item button {
-  font-size: 0.85rem;
-  padding: 8px 12px;
-}
-
 .item .add {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: var(--chip);
+  background: var(--btn-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
   cursor: pointer;
-  padding: 0;
+  padding: 10px;
 }
 
 .add-icon {

@@ -7,6 +7,13 @@ async function fetchJSON(url){
   return res.json();
 }
 
+let debounceTimer = null;
+
+function debounce(fn, delay) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(fn, delay);
+}
+
 function renderItem(track, withAdd){
   const el = tpl("item-tpl");
   el.querySelector(".cover").src = track.image || "";
@@ -15,18 +22,33 @@ function renderItem(track, withAdd){
   const btn = el.querySelector(".add");
   if(withAdd){
     btn.onclick = async () => {
-      btn.disabled = true; btn.textContent = "Wird hinzugefügt…";
-      try{
+      const icon = btn.querySelector(".add-icon");
+
+      // Loading-Icon
+      icon.src = "/icons/wait.png";
+      btn.disabled = true;
+
+      try {
         const res = await fetch("/api/add", {
-          method:"POST",
-          headers:{ "Content-Type":"application/json" },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ uri: track.uri })
         });
-        const ok = res.ok;
-        btn.textContent = ok ? "Hinzugefügt!" : "Fehler";
+
+        if (res.ok) {
+          icon.src = "/icons/success.png";
+        } else {
+          icon.src = "/icons/error.png";
+        }
+
+        // Playlist reloaden
         setTimeout(loadPlaylist, 400);
-      }catch(e){ btn.textContent = "Fehler"; }
+
+      } catch (e) {
+        icon.src = "/icons/error.png";
+      }
     };
+
   } else {
     btn.remove();
   }
@@ -62,8 +84,23 @@ async function doSearch(){
   }
 }
 
-qs("#btnSearch").addEventListener("click", doSearch);
-qs("#search").addEventListener("keydown", e => { if(e.key === "Enter") doSearch(); });
+qs("#search").addEventListener("input", () => {
+  const val = qs("#search").value.trim();
+
+  // Leere Suche = Suchfeld resetten
+  if (!val) {
+    qs("#results").innerHTML = "";
+    return;
+  }
+
+  debounce(() => {
+    doSearch();
+  }, 250); // 250ms ist schnell + effizient
+});
+
+qs("#search").addEventListener("keydown", e => {
+  if (e.key === "Enter") doSearch();
+});
 
 loadPlaylist();
 setInterval(loadPlaylist, 30000); // auto-refresh
