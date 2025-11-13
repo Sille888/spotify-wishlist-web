@@ -35,7 +35,10 @@ async function ensureAccess() {
   const { expires_at } = loadTokens();
   if (!expires_at || Date.now() > expires_at) {
     const res = await api.refreshAccessToken();
-    saveTokens({ access_token: res.body.access_token, expires_in: res.body.expires_in });
+    saveTokens({
+      access_token: res.body.access_token,
+      expires_in: res.body.expires_in
+    });
   }
 }
 
@@ -79,4 +82,12 @@ async function addToPlaylist(playlistId, uris) {
   await api.addTracksToPlaylist(playlistId, Array.isArray(uris) ? uris : [uris]);
 }
 
-module.exports = { api, loadTokens, saveTokens, ensureAccess, getPlaylistItems, searchTracks, addToPlaylist };
+module.exports = {
+  api,
+  loadTokens,
+  saveTokens,
+  ensureAccess,
+  getPlaylistItems,
+  searchTracks,
+  addToPlaylist
+};

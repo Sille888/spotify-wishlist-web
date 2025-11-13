@@ -4,7 +4,13 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const {
-  api, loadTokens, saveTokens, getPlaylistItems, searchTracks, addToPlaylist
+  api,
+  loadTokens,
+  saveTokens,
+  ensureAccess,
+  getPlaylistItems,
+  searchTracks,
+  addToPlaylist
 } = require("./spotify");
 
 const app = express();
