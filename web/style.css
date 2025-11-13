@@ -74,19 +74,23 @@ body {
   margin-bottom: 14px;
 }
 
-.nowplaying-box .progressbar {
-  width: 100%;
-  height: 6px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 4px;
-  margin-top: 6px;
-  overflow: hidden;
+.np-link-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--btn-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
-.nowplaying-box .progressbar .progress {
-  height: 100%;
-  background: var(--chip);
-  width: 0%;
+.np-link-icon {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
 }
 
 /* Kartenbereiche */

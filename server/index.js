@@ -103,8 +103,7 @@ app.get("/api/nowplaying", async (req, res) => {
       name: track.name,
       artists: track.artists.map(a => a.name).join(", "),
       image: track.album.images?.[1]?.url || track.album.images?.[0]?.url || null,
-      progress_ms: data.body.progress_ms,
-      duration_ms: track.duration_ms
+      url: track.external_urls.spotify
     });
 
   } catch (e) {

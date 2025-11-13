@@ -124,9 +124,7 @@ async function loadNowPlaying() {
     box.querySelector(".cover").src = data.image;
     box.querySelector(".name").textContent = data.name;
     box.querySelector(".artist").textContent = data.artists;
-
-    const progress = (data.progress_ms / data.duration_ms) * 100;
-    box.querySelector(".progress").style.width = progress + "%";
+    qs("#npLink").href = data.url;
 
   } catch (e) {
     // Bei Fehler lieber auch verstecken
