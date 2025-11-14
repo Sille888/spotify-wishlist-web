@@ -162,7 +162,7 @@ async function loadNowPlaying() {
     }
 
     // Song aktiv → Box anzeigen
-    box.style.display = "flex";
+    box.style.display = "block";
 
     // Inhalte setzen
     box.querySelector(".cover").src = data.image;
